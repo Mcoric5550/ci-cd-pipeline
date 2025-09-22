@@ -43,15 +43,15 @@ jobs:
         run: php artisan key:generate
     
       # pokretanje migracija - postavljamo .env varijable za testiranje unutar samog koraka
-      - name: Run Migrations
-        env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: cicd
-          DB_PORT: 3306
-          DB_HOST: localhost
-          DB_USERNAME: root
-          DB_PASSWORD: 351211mm
-        run: php artisan migrate
+  #    - name: Run Migrations
+   #     env:
+   #       DB_CONNECTION: mysql
+   #       DB_DATABASE: cicd
+   #       DB_PORT: 3306
+   #       DB_HOST: localhost
+   #       DB_USERNAME: root
+   #       DB_PASSWORD: 351211mm
+   #     run: php artisan migrate
 
       # pokretanje testova
       - name: Execute tests (PHPUnit)
