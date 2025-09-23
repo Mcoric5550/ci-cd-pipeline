@@ -7,7 +7,7 @@
 </head>
 <body>
     <p>Cars list testing2:</p>
-    <p>tesat</p>
+    <p>lista auta</p>
 
     <ul>
     @foreach($cars as $car)
