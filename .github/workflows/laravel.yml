@@ -14,7 +14,7 @@ permissions:
 jobs:
   laravel-tests:
     # definiramo na kojem operativnom sustavu će se posao izvršavati
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     # koraci (steps) koje treba izvršiti redom
     steps:
