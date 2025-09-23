@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   laravel-tests:
+
     # definiramo na kojem operativnom sustavu će se posao izvršavati
     runs-on: ubuntu-latest
 
@@ -41,25 +42,26 @@ jobs:
       # generiranje ključa aplikacije
       - name: Generate key
         run: php artisan key:generate
-    
-      # pokretanje migracija - postavljamo .env varijable za testiranje unutar samog koraka
-  #    - name: Run Migrations
-   #     env:
-   #       DB_CONNECTION: mysql
-   #       DB_DATABASE: cicd
-   #       DB_PORT: 3306
-   #       DB_HOST: localhost
-   #       DB_USERNAME: root
-   #       DB_PASSWORD: 351211mm
-   #     run: php artisan migrate
+  deploy:
+  needs: laravel-tests
+  runs-on: ubuntu-latest
 
-      # pokretanje testova
-   #   - name: Execute tests (PHPUnit)
-   #     env:
-   #       DB_CONNECTION: mysql
-   #       DB_DATABASE: cicd
-   #       DB_PORT: 3306
-   #       DB_HOST: localhost
-   #       DB_USERNAME: root
-   #       DB_PASSWORD: 351211mm        
-   #     run: php artisan test
+  steps:
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          cd /var/www/html/ci-cd-pipeline
+          git reset --hard
+          git pull origin main
+          composer install --no-dev --optimize-autoloader
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+
+ 

@@ -6,7 +6,7 @@
     <title>Auti</title>
 </head>
 <body>
-    <p>car list:</p>
+    <p>car list test:</p>
 
     <ul>
     @foreach($cars as $car)
