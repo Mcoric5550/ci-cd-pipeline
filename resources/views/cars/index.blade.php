@@ -6,7 +6,7 @@
     <title>Auti</title>
 </head>
 <body>
-    <p>Cars list testing2:</p>
+    <p>Cars list</p>
     <p>lista auta</p>
 
     <ul>
