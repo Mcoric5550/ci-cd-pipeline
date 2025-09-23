@@ -13,9 +13,8 @@ permissions:
 
 jobs:
   laravel-tests:
-
     # definiramo na kojem operativnom sustavu će se posao izvršavati
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     # koraci (steps) koje treba izvršiti redom
     steps:
@@ -44,7 +43,7 @@ jobs:
         run: php artisan key:generate
   deploy:
     needs: laravel-tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Deploy to server
