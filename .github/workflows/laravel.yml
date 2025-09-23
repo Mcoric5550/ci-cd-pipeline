@@ -47,20 +47,15 @@ jobs:
 
     steps:
       - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/html/ci-cd-pipeline
-            git reset --hard
-            git pull origin main
-            composer install --no-dev --optimize-autoloader
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+        run: |
+          cd /var/www/html/ci-cd-pipeline
+          git reset --hard
+          git pull origin main
+          composer install --no-dev --optimize-autoloader
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
 
 
   
